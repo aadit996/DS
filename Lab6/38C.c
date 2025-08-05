@@ -1,65 +1,35 @@
 #include<stdio.h>
-#include<string.h>
+struct interval{
+    int start;
+    int end;
+};
 
-char stack[100];
+struct interval stack[100];
+
+void push();
+
+struct interval pop();
 
 int top=-1;
 
-void push(char c);
-
-char pop();
-
-char* star(char str[]);
-
 void main(){
-    char str[100];
-
-    printf("Enter a string : ");
-    scanf("%s",&str);
-
-    char temp[100];
-    strcpy(temp,star(str));
-
-    printf("Result : %s",temp);
-
-
+    int arr[4][2]={{1,3},{2,4},{6,8},{9,10}};
+    
 }
-void push(char c){
+
+void push(struct interval temp){
     if(top>=99){
         printf("Stack overflow");
         return;
     }
     top++;
-    stack[top]=c;
+    stack[top]=temp;
 }
 
-char pop(){
+struct interval pop(){
     if(top==-1){
-        printf("Satck underflow");
-        return '#';
+        printf("Stack underflow");
     }
     top--;
     return stack[top+1];
-}
-
-
-char* star(char str[]){
-    for(int i=0;str[i] != '\0';i++){
-        if(str[i]>='a' && str[i]<='z'){
-            char temp=str[i];
-            push(temp);
-            continue;
-        }
-        if(str[i] == '*'){
-            pop();
-            continue;
-        }
-    }
-    static char temp[100];
-    for(int i=0;i<=top;i++){
-        temp[i]=stack[i];
-    }
-    temp[top+1]='\0';
-
-    return temp;
 }
