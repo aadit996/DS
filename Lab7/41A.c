@@ -12,13 +12,13 @@ char pop(){
     return stack[top--];
 }
 
-int stack_precedence(char c){
+int stack_precedence(char c){//G
     if(c == '+' || c == '-')
-        return 1;
+        return 2;
     else if(c == '*' || c == '/')
-        return 3;   
+        return 4;   
     else if(c == '^')
-        return 6;
+        return 5;
     else if(c == '(')
         return 0; 
     else
@@ -26,13 +26,13 @@ int stack_precedence(char c){
 
 }
 
-int input_precedence(char c){
+int input_precedence(char c){//F
     if(c == '+' || c == '-')
-        return 2;
+        return 1;
     else if(c == '*' || c == '/')
-        return 4;   
+        return 3;   
     else if(c == '^')
-        return 5;
+        return 6;
     else if(c == '(')
         return 9;
     else if(c == ')')
@@ -42,7 +42,7 @@ int input_precedence(char c){
 
 }
 
-int r(char c){
+int r(char c){//rank
     if(c == '+' || c == '-' || c == '*' || c == '/' || c =='^')
         return -1;
     else
@@ -85,28 +85,15 @@ void revpol(char infix[]){
     if(top!=-1 || rank != 1)
         printf("Invalid");
     else{
-        printf("%s", strrev(postfix));
+        printf("%s", postfix);
     }
 }  
 
 void main(){
-    char infix[100], rev_infix[100];
-    int k = 0, i;
+    char infix[100];
     printf("Enter the infix expression: ");
     scanf("%s",infix);
-    for(i=strlen(infix)-1; i>=0 ;i--){
-        if(infix[i] == ')'){
-            rev_infix[k++] = '(';
-        }
-        else if(infix[i] == '('){
-            rev_infix[k++] = ')';
-        }
-        else{
-            rev_infix[k++] = infix[i];
-        }
-    }
-    rev_infix[k] = '\0';
-    strcat(rev_infix,")");
-    // printf("Postfix expression is: %s ",infix);
-    revpol(rev_infix);
+    strcat(infix,")");
+    printf("Postfix expression is: %s \n",infix);//"(" is manually pushed in stack
+    revpol(infix);
 }

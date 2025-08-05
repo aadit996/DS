@@ -72,9 +72,10 @@ void deleteNodeFromSpecifiedPosition(int pos){
 
     if(pos>numOfnodes){
         printf("Enter valid position");
+        return;
     }
 
-    else{
+    
 
         save=first;
         struct node *pred=NULL;
@@ -96,8 +97,8 @@ void deleteNodeFromSpecifiedPosition(int pos){
         }
 
 
-    }
 }
+
 
 void insertAtEnd(int n){
     struct node* newNode=(struct node*)malloc(sizeof(struct node));
