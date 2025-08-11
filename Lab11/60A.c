@@ -85,7 +85,7 @@ void push(int info){
 
 int pop(){
     if(first==NULL){
-        return 0000;
+        return  ;
     }
     else{
         struct node*save=first;

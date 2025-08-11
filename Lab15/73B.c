@@ -74,7 +74,7 @@ void deleteAlternate(){
         }
 
 
-        save->rptr=temp;
+        save->rptr=temp;  
         temp->lptr=save;
 
         save=temp;

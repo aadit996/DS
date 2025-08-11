@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 
 char stack[100];
 
@@ -28,7 +29,7 @@ void push(char c){
 }
 
 char pop(){
-    if(top=-1){
+    if(top<0){
         printf("Stack underflow");
         return '#';
     }
@@ -40,26 +41,31 @@ void result(int testcase){
     for(int i=0;i<testcase;i++){//for each string
 
         char str[100];
-        int len;
+        int len=0;
         char temp[100];
+        int k=0;
+        int pushCount=0;
 
         printf("Enter length : ");
         scanf("%d",&len);
 
         printf("Enter string : ");
-        scanf("%s",&str);
+        scanf("%s",str);
 
-        for(int j=0;str[j] != '\0';j++){//iterate that particular string
-            if(str[j+1] == 'a'||str[j+1] == 'e'||str[j+1] == 'i'||str[j+1] == 'o'||str[j+1] == 'u'){
-                for(int k=0;)
-            }
-            else{
-                char c=str[i];
-                push(c);
-                continue;
+        for(int j=0;j<len;j++){
+        if(str[j+1]=='a'||str[j+1]=='e'||str[j+1]=='i'||str[j+1]=='o'||str[j+1]=='u'){//vowel
+            for(int count=pushCount;count>=0;count++){
+                char temp=pop();
+                temp[i]
             }
         }
-        
+        else{//not vowel
+            char temp=str[j];
+            push(temp);
+            pushCount++;
+        }
 
-    }
-}
+        printf("Answer : %s\n",temp);
+        
+    }//loop for selecting str
+}//func
