@@ -19,37 +19,83 @@ struct node* createNode(int x){
     return newNode;
 }
 
-struct node* insertNode(int n,struct node *temp){
-    if(temp==NULL){
-        temp = createNode(n);
-        
+struct node* insertNode(int n,struct node *child){
+    if(child==NULL){
+        return createNode(n);
+    }
+    else if(child->info > n){
+        child->lptr=insertNode(n,child->lptr);
+    }
+    else if(child->info < n){
+        child->rptr=insertNode(n,child->rptr);
     }
 
-    if(n>temp->info){
-        temp->rptr=insertNode(n,temp->rptr);
+    return child;
+}
+
+void search(int n,struct node *child){
+    if(child == NULL){
+    printf("element not found\n");
+    return;
+    }
+    if(child->info==n){
+        printf("Element found %d\n",n);
+        return;
+    }
+    if(n>child->info){
+        search(n,child->rptr);
+    }
+    else{
+        search(n,child->lptr);
+    }
+    return;
+}
+
+struct node* findMin(struct node * temp){
+    struct node* save=temp;
+    while(save->lptr != NULL){
+        save=save->lptr;
+    }
+    return save;
+}
+
+struct node* deleteNode(int n,struct node* temp){
+    if(temp == NULL){
+        return NULL;
+    }
+    else if(n>temp->info){
+        temp->rptr=deleteNode(n,temp->rptr);
     }
     else if(n<temp->info){
-        temp->lptr=insertNode(n,temp->lptr);
+        temp->lptr=deleteNode(n,temp->lptr);
+    }
+
+    else{
+        if(temp->lptr == NULL && temp->rptr == NULL){
+            free(temp);
+            return NULL;
+        }
+        else if(temp->lptr == NULL){
+            struct node* rightchild=temp->rptr;
+            free(temp);
+            return rightchild;
+        }
+        else if(temp->rptr == NULL){
+            struct node* leftchild=temp->lptr;
+            free(temp);
+            return leftchild;
+        }
+        else{
+            struct node* minNodeofrst=findMin(temp->rptr);
+            temp->info=minNodeofrst->info;
+            temp->rptr=deleteNode(temp->info,temp->rptr);
+
+        }
     }
     return temp;
 }
 
-void search(int n,struct node *save){
 
-    if(save == NULL){
-      
-        return;
-    }
-
-    if(n==save->info){
-        printf("%d found\n",save->info);
-        return;
-    }
-    search(n,save->lptr);
-    search(n,save->rptr);
-
-    printf("Element not found\n");
-}
 
 void preorderTraversal(struct node* save){
     if(save==NULL){
@@ -92,7 +138,7 @@ void main(){
 
 
     while(n != -1){
-            printf("Enter 1 to insert node\nEnter 2 to preorderTraversal \nEnter 3 to inorderTraversal\nEnter 4 to posorderTraversal\nEnter 5 to Search element\nEnter -1 to EXIT\n");
+            printf("Enter 1 to insert node\nEnter 2 to preorderTraversal \nEnter 3 to inorderTraversal\nEnter 4 to posorderTraversal\nEnter 5 to Search element\nEnter 6 element to be deleted\nEnter -1 to EXIT\n");
             scanf("%d",&n);
 
         switch(n){
@@ -114,6 +160,14 @@ void main(){
             scanf("%d",&z);
 
             search(z,root);
+            break;
+            case 6:
+            printf("Enter element to be deleted : ");
+            int num;
+            scanf("%d",&num);
+
+            struct node *y=deleteNode(num,root);
+            printf("Node deleted : %d\n",y);
             break;
 
             default:printf("Enter valid case");

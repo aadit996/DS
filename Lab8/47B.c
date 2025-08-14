@@ -1,13 +1,15 @@
 #include<stdio.h>
-int queue[5]={1,2,3};
+int queue[5];
+
+// (rear + 1) % SIZE
+
 
 int f=-1;
 int r=-1;
 
 void cqinsert(int n){
-    if(r==f){
-        printf("Queue overflow");
-        return;
+     if(f==-1){
+        f=0;
     }
     if(r==5){//r at last
         r=0;
@@ -15,17 +17,19 @@ void cqinsert(int n){
     else{
         r++;
     }
+    if(r==f){
+        printf("Queue overflow");
+        return;
+    }
     queue[r]=n;
 
-    if(f=-1){
-        f=0;
-    }
+   
 }
 
 int cqdelete(){
     if(f==-1){
         printf("Queue underflow");
-        return;
+        return -1;
     }
     int y=queue[f];
     if(r==f){
@@ -34,12 +38,10 @@ int cqdelete(){
         
     }
 
-    if(f==5){
-        f=0;
-    }
-    else{
+  
+  
         f--;
-    }
+    
     return y;
 }
 
