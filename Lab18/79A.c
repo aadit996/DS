@@ -16,6 +16,7 @@ struct Node* newNode(int data) {
 
 // Function to search an element in postorder[]
 int search(int postorder[], int val, int start, int end) {
+    
     for (int i = start; i <= end; i++) {
         if (postorder[i] == val)
             return i;
