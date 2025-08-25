@@ -1,4 +1,3 @@
-//find min element as compared to first element the interchange
 #include<stdio.h>
 //large go last
 void bubbleSort(int a[],int n){
