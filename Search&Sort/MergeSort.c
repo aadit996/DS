@@ -40,7 +40,7 @@ void merge(int low,int mid,int high){
         }
     }
 
-    for(k=0;k<n;k++){
+    for(k=low;k<=high;k++){
         a[k]=temp[k];
     }
 
@@ -49,7 +49,7 @@ void merge(int low,int mid,int high){
 
 void mergeSort(int low,int high){
     
-    while(low<high){
+    if(low<high){
         int mid=floor((low+high)/2);
 
         mergeSort(low,mid);
