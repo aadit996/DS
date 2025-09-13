@@ -10,7 +10,7 @@ int f=-1;
 int r=-1;
 
 void cqinsert(int n){  
-    if(f == ((r+1)%5)){//base condition
+    if(f == ((r+1)%5) && f != -1){//base condition
         printf("Queue overflow");
         return;
     }
